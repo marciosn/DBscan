@@ -106,9 +106,13 @@ public class Point implements Serializable{
 
 	@Override
 	public String toString() {
+		return "[ " + idPonto +  " ]";
+	}
+	
+	/*@Override
+	public String toString() {
 		return "Point [idPonto=" + idPonto + ", idTaxi=" + idTaxi + ", idCluster=" + idCluster + ", longitude="
 				+ longitude + ", latitude=" + latitude + ", isNoise=" + isNoise + ", isCore=" + isCore + ", time="
 				+ time + ", dist=" + dist + ", visit=" + visit + "]";
-	}
-	
+	}*/
 }

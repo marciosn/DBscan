@@ -28,4 +28,9 @@ public class Cluster {
 		this.points = points;
 	}
 
+	@Override
+	public String toString() {
+		return "Cluster [idCluster=" + idCluster + ", points=" + points + "]";
+	}
+
 }

@@ -36,17 +36,13 @@ public class Utils {
 
 			double euclideanDist = getEuclidean(longitudePoint, latitudePoint, longitudeOther, latitudeOther);
 			
-			//TODO verificar se é necessário adicionar o point a list de points
 			if (point.getIdPonto() != p.getIdPonto() && euclideanDist <= eps) {
 				neighborPts.add(p);
 			}
-			
-			/*if (point.getIdPonto() == p.getIdPonto()) {
-				System.out.println(point.toString());
-			}*/
+
 		}
 		
-		printNeighbors(point, neighborPts);
+		//printNeighbors(point, neighborPts);
 
 		return neighborPts;
 	}
