@@ -12,11 +12,15 @@ import br.com.ufc.quixada.dbscan.utils.Utils;
 public class DBscan {
 	
 	public static void main(String[] args) {
-		String path = "C:/DBscan/input/SegundaReduzido2.csv";
+		/*String path = "C:/DBscan/input/SegundaReduzido2.csv";*/
+		/*String path = "/home/lionel/Dropbox/Topicos/SegundaConjuntoTeste.csv";*/
+		String path = "/home/lionel/Dropbox/Topicos/SegundaReduzido4.csv";
+		
+		System.out.println("################ Começou #############");
 		
 		try {
 			List<Point> dataSet = new RetrieveData().getDataSetFromFile(path);
-			runDBscan(dataSet, 0.01, 4);
+			runDBscan(dataSet, 0.001, 10);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -46,5 +50,6 @@ public class DBscan {
 			}
 			i++;
 		}
+		System.out.println("*************************Terminou****************");
 	} 
 }

@@ -30,6 +30,9 @@ public class RetrieveData {
 			int i = 1;
 			while ((line = br.readLine()) != null) {
 				result = line.split(cvsSplitBy);
+				
+				if (result[0] == null || result[0].equals(""))
+					continue;
 
 				Integer idTaxi = Integer.valueOf(result[0]);
 				Timestamp time = utils.getTime(result[1]);
