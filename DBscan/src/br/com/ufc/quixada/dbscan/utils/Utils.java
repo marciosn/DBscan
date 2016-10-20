@@ -2,6 +2,7 @@ package br.com.ufc.quixada.dbscan.utils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,14 +23,32 @@ public class Utils {
 		return timestamp;
 	}
 	
-	public List<Point> regionQuery(double eps, Point point, List<Point> dataSet){
+	public List<Point> regionQuery(double eps, Point point, List<Point> dataSet) {
+		
+		List<Point> neighborPts = new ArrayList<>();
+		double longitudePoint = point.getLongitude().doubleValue();
+		double latitudePoint = point.getLatitude().doubleValue();
 		
 		for (Point p : dataSet) {
-			double result = getEuclidean(point.getLongitude(), point.getLatitude(), p.getLongitude(), p.getLatitude());
-			System.out.println(result);
+			
+			double longitudeOther = p.getLongitude().doubleValue();
+			double latitudeOther = p.getLatitude().doubleValue();
+
+			double euclideanDist = getEuclidean(longitudePoint, latitudePoint, longitudeOther, latitudeOther);
+			
+			//TODO verificar se é necessário adicionar o point a list de points
+			if (point.getIdPonto() != p.getIdPonto() && euclideanDist <= eps) {
+				neighborPts.add(p);
+			}
+			
+			/*if (point.getIdPonto() == p.getIdPonto()) {
+				System.out.println(point.toString());
+			}*/
 		}
 		
-		return null;
+		printNeighbors(point, neighborPts);
+
+		return neighborPts;
 	}
 	
 	public double getEuclidean(double longitudePoint, double latitudePoint, double longitudeOther, double latitudeOther){
@@ -44,4 +63,10 @@ public class Utils {
 		return euclidean;
 	}
 	
+	public void printNeighbors(Point point, List<Point> dataSet){
+		for (int i = 0; i < dataSet.size(); i++) {
+			System.out.println("o ponto é = " + point.getIdPonto() +
+					" o seu vizinho é o ponto com o id = " + dataSet.get(i).getIdPonto());
+		}
+	}
 }

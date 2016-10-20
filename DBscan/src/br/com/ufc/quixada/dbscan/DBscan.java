@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,26 +39,28 @@ public class DBscan {
 			try {
 				
 				br = new BufferedReader(new FileReader(csvFile));
+				int i = 1;
 				while ((line = br.readLine()) != null) {
 					result = line.split(cvsSplitBy);
 					
 					Integer idTaxi = Integer.valueOf(result[0]);
 					Timestamp time = utils.getTime(result[1]);
-					Long latitude = (long) Double.parseDouble(result[2]);
-					Long longitude = (long) Double.parseDouble(result[3]);
+					BigDecimal latitude = new BigDecimal(result[2]);
+					BigDecimal longitude = new BigDecimal(result[3]);
 					
 					point = new Point();
 					point.setIdTaxi(idTaxi);
 					point.setTime(time);
 					point.setLatitude(latitude);
 					point.setLongitude(longitude);
-									
-					System.out.println("->" + point.toString());
+					point.setIdPonto(i);
+					
 					dataSet.add(point);
+					i++;
 				}
 				
 			for (Point p : dataSet) {
-				//utils.regionQuery(0, p, dataSet);
+				utils.regionQuery(0.01, p, dataSet);
 			}
 
 			} catch (FileNotFoundException e) {
@@ -72,6 +77,5 @@ public class DBscan {
 				}
 			}
 
-			System.out.println("Sucesso!");
 		  }
 }
